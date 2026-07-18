@@ -52,7 +52,14 @@
     "steps": [
       {
         "send": { "text": "What is the weather today?" },
-        "expect": []
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Sorry, I didn't understand that. Try /help."
+            }
+          }
+        ]
       }
     ]
   },

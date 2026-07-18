@@ -103,11 +103,12 @@ const RATE_WINDOW_MS = 60 * 60 * 1000;
 function isPythonQuestion(text: string): boolean {
   const lower = text.toLowerCase();
   const pythonKeywords = [
-    "python", "def ", "class ", "import ", "print(", "self.", "__init__",
+    "python", "def", "class", "import", "print(", "self.", "__init__",
     "for ", "while ", "if ", "elif ", "else:", "try:", "except:",
     "lambda", "list", "dict", "tuple", "set", "str(", "int(", "float(",
     "len(", "range(", "append", "remove", "pop(", "items()",
-    "read(", "write(", "open(", "with open", "pip ", "conda ",
+    "read", "write", "open", "with open", "pip ", "conda ",
+    "error", "string", "comprehension",
   ];
   return pythonKeywords.some((kw) => lower.includes(kw));
 }
@@ -168,11 +169,11 @@ function handleFollowUp(session: Ctx["session"], text: string): string | null {
 
 const composer = new Composer<Ctx>();
 
-composer.on("message:text", async (ctx) => {
+composer.on("message:text", async (ctx, next) => {
   const text = ctx.message.text;
-  if (text.startsWith("/")) return;
+  if (text.startsWith("/")) return next();
 
-  if (!isPythonQuestion(text)) return;
+  if (!isPythonQuestion(text)) return next();
 
   if (!ctx.session.rateLimitTimestamps) ctx.session.rateLimitTimestamps = [];
   ctx.session.rateLimitTimestamps = ctx.session.rateLimitTimestamps.filter(
