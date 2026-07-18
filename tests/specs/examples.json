@@ -1,19 +1,26 @@
 [
   {
-    "name": "/examples",
+    "name": "/examples shows sample Python questions",
     "steps": [
       {
+        "send": { "text": "/examples" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Display a short list of example Python questions the bot can answer"
+              "text": "💡 Here are some Python questions you can ask me:\n\n• How do I create a list?\n• Write a function that adds two numbers\n• What is a dictionary?\n• How do I read a file?\n• Show me a for loop\n• How do I handle errors?\n\nJust type your Python question and I'll help!"
             }
           }
-        ],
-        "send": {
-          "text": "/examples"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "the Examples menu button shows the same examples",
+    "steps": [
+      {
+        "send": { "callback": "examples:show" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }
