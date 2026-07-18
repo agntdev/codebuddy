@@ -1,0 +1,115 @@
+[
+  {
+    "name": "auto-reply to Python question about lists",
+    "steps": [
+      {
+        "send": { "text": "How do I create a list in Python?" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "📚 Lists in Python\n\n```python\nmy_list = [1, 2, 3]\nmy_list.append(4)\nprint(my_list)  # [1, 2, 3, 4]\n```\n\nLists store multiple items in order. Use append() to add items, and access them by index starting at 0.\n\n💡 Try removing an item with my_list.remove(2) or popping with my_list.pop()."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "auto-reply to Python question about functions",
+    "steps": [
+      {
+        "send": { "text": "Write a function in Python" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "📚 Functions in Python\n\n```python\ndef greet(name):\n    return f'Hello, {name}!'\n\nprint(greet('World'))\n```\n\nFunctions are reusable blocks of code. Define them with def, pass parameters, and return results.\n\n💡 Try adding a default parameter: def greet(name='World'):"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "auto-reply to Python question about dictionaries",
+    "steps": [
+      {
+        "send": { "text": "What is a dictionary in Python?" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "📚 Dictionaries in Python\n\n```python\nmy_dict = {\"name\": \"Alice\", \"age\": 25}\nprint(my_dict[\"name\"])  # Alice\nmy_dict[\"city\"] = \"NYC\"\n```\n\nDictionaries store key-value pairs. Access values by key and add new pairs by assigning to a new key.\n\n💡 Try iterating with for key, value in my_dict.items(): print(key, value)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ignores non-Python questions",
+    "steps": [
+      {
+        "send": { "text": "What is the weather today?" },
+        "expect": []
+      }
+    ]
+  },
+  {
+    "name": "rate limiting after too many questions",
+    "steps": [
+      {
+        "send": { "text": "How do I create a list?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "Write a function in Python" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "What is a dictionary?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "How do I read a file?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "Show me a for loop" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "How do I handle errors?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "What about strings?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "Tell me about sets" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "How do I use imports?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "What is a class?" },
+        "expect": [{ "method": "sendMessage" }]
+      },
+      {
+        "send": { "text": "How do I use comprehensions?" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "You've asked a lot of questions recently! Take a break and try again in a bit."
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

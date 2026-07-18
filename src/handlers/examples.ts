@@ -1,15 +1,30 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard, registerMainMenuItem } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
+registerMainMenuItem({ label: "💡 Examples", data: "examples:show", order: 30 });
 
-const composer = new Composer();
+const EXAMPLES_TEXT =
+  "💡 Here are some Python questions you can ask me:\n\n" +
+  "• How do I create a list?\n" +
+  "• Write a function that adds two numbers\n" +
+  "• What is a dictionary?\n" +
+  "• How do I read a file?\n" +
+  "• Show me a for loop\n" +
+  "• How do I handle errors?\n\n" +
+  "Just type your Python question and I'll help!";
+
+const backToMenu = inlineKeyboard([[inlineButton("⬅️ Back to menu", "menu:main")]]);
+
+const composer = new Composer<Ctx>();
 
 composer.command("examples", async (ctx) => {
-  await ctx.reply("Display a short list of example Python questions the bot can answer");
+  await ctx.reply(EXAMPLES_TEXT, { reply_markup: backToMenu });
+});
+
+composer.callbackQuery("examples:show", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  await ctx.editMessageText(EXAMPLES_TEXT, { reply_markup: backToMenu });
 });
 
 export default composer;
